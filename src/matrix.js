@@ -1,16 +1,6 @@
 const helper = require('./helper');
 
-const registry = {};
-
-exports.init = (key, s) => {
-    const matrix = helper.lex(s);
-    registry[key] = matrix;
-    console.log(`Created matrix ${key}.\n`, helper.stringify(registry[key]));
-}
-
-const reduce = (key1, key2, compute) => {
-    const matrix1 = registry[key1];
-    const matrix2 = registry[key2];
+const reduce = (matrix1, matrix2, compute) => {
     const result = [];
     for(let i = 0; i < matrix1.length; i++){
         result.push([]);
@@ -21,24 +11,11 @@ const reduce = (key1, key2, compute) => {
     return result;
 }
 
-const add = (x, y) => x + y;
+exports.add = (matrix1, matrix2) => reduce(matrix1, matrix2, (x, y) => x + y);
 
-exports.add = (key1, key2) => {
-    const result = reduce(key1, key2, add);
-    console.log(`${key1} + ${key2} =\n`, helper.stringify(result));
-    return result;
-}
+exports.subtract = (matrix1, matrix2) => reduce(matrix1, matrix2, (x, y) => x - y);
 
-const sub = (x, y) => x - y;
-
-exports.sub = (key1, key2) => {
-    const result = reduce(key1, key2, sub);
-    console.log(`${key1} - ${key2} =\n`, helper.stringify(result));
-    return result;
-}
-
-exports.scale = (key, scalar) => {
-    const matrix = registry[key];
+exports.scale = (matrix, scalar) => {
     const result = [];
     for(let i = 0; i < matrix.length; i++){
         result.push([]);
@@ -46,7 +23,6 @@ exports.scale = (key, scalar) => {
             result[i].push(matrix[i][j] * scalar);
         }
     }
-    console.log(`${scalar}${key} =\n`, helper.stringify(result));
     return result;
 }
 
@@ -64,9 +40,7 @@ const multiply = (row, col) => {
     return result;
 };
 
-exports.prod = (key1, key2) => {
-    const matrix1 = registry[key1];
-    const matrix2 = registry[key2];
+exports.product = (matrix1, matrix2) => {
     const product = [];
     matrix1.forEach((row) => {
         const productRow = []
@@ -76,6 +50,5 @@ exports.prod = (key1, key2) => {
         }
         product.push(productRow);
     });
-    console.log(`${key1} * ${key2} =\n`, helper.stringify(product));
     return product;
 }

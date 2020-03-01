@@ -17,7 +17,7 @@ exports.stringify = matrix => {
 }
 
 const toIntegers = (line) => {
-    return line.match(digits).map(d => parseInt(d));
+    return line.trim().match(digits).map(d => parseInt(d));
 }
 
 exports.lex = (s) => {
