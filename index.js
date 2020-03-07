@@ -1,37 +1,48 @@
 const matrix = require('./src/matrix');
+const calculator = require('./src/calculator');
 
-const _A = `
-2   9
-4   1 
+const A = `
+1   2
+3   -1
 `;
 
-const _B = `
-3   8
-5   7 
+const B = `
+6   -1
+5   3
 `;
 
-const _PQR = `
-2   2   0
-0   3   0
+const C = `
+-1
+1
 `;
 
-const _D = `
-1   2   5
-4   6   9
-`;
+calculator.init('A', A);
+calculator.init('B', B);
+calculator.init('C', C);
 
-const _E = `
-2   5   6
-1   7   2
-9   6   1
-`;
+console.group('1.');
 
-matrix.init('A', _A);
-matrix.init('B', _B);
-matrix.init('PQR', _PQR);
-matrix.init('D', _D);
-matrix.init('E', _E);
-let _ = matrix.add('A', 'B');
-_ = matrix.sub('A', 'B');
-_ = matrix.scale('PQR', 2);
-_ = matrix.prod('D', 'E');
+// console.log('(a)'); 
+// calculator.do('A + B');
+// console.log('(b)'); 
+// calculator.do('B + A');
+// console.log('(c)'); 
+// calculator.do('B + B'); 
+// console.log('(d)'); 
+// calculator.do('3B');  
+// console.log('(e)'); 
+// calculator.do('3A + 2B'); 
+// console.log('(f)'); 
+// calculator.do('A + C');  
+// console.log('(g)'); 
+// calculator.do('B + C'); 
+// console.log('(h)'); 
+// calculator.do('AC');  
+// console.log('(i)'); 
+// calculator.do('BC'); 
+// console.log('(j)'); 
+// calculator.do('5A − 7BC'); 
+console.log('(k)'); 
+calculator.do('3AC − 2BC'); 
+
+console.groupEnd();

@@ -1,5 +1,3 @@
-const helper = require('./helper');
-
 const reduce = (matrix1, matrix2, compute) => {
     const result = [];
     for(let i = 0; i < matrix1.length; i++){
@@ -11,9 +9,19 @@ const reduce = (matrix1, matrix2, compute) => {
     return result;
 }
 
-exports.add = (matrix1, matrix2) => reduce(matrix1, matrix2, (x, y) => x + y);
+exports.add = (matrix1, matrix2) => {
+    if(matrix1.length != matrix2.length || matrix1[0].length != matrix2[0].length) {
+        throw('Cannot add matrices because they are different sizes.');
+    }
+    return reduce(matrix1, matrix2, (x, y) => x + y)
+};
 
-exports.subtract = (matrix1, matrix2) => reduce(matrix1, matrix2, (x, y) => x - y);
+exports.subtract = (matrix1, matrix2) => {
+    if(matrix1.length != matrix2.length || matrix1[0].length != matrix2[0].length) {
+        throw('Cannot subtract matrices because they are different sizes.');
+    }
+    return reduce(matrix1, matrix2, (x, y) => x - y);
+}
 
 exports.scale = (matrix, scalar) => {
     const result = [];
@@ -42,9 +50,13 @@ const multiply = (row, col) => {
 
 exports.product = (matrix1, matrix2) => {
     const product = [];
+    if(matrix1[0].length !== matrix2.length) {
+        throw('Cannot multiply matrices. Number of columns of left hand matrix does not equal number of rows of right hand matrix.')
+    }
+    const cols = matrix2[0].length;
     matrix1.forEach((row) => {
         const productRow = []
-        for(let i = 0; i < row.length; i++){
+        for(let i = 0; i < cols; i++){
             const col = getColumn(matrix2, i);
             productRow.push(multiply(row, col));
         }
