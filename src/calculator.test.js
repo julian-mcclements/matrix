@@ -6,6 +6,9 @@ calculator.init('A',`
 calculator.init('B',`
     3   8
     5   7`);
+calculator.init('C',`
+    1   2
+    3   4`);    
 
 test('Can register and initialise a new matrix', () => {
     // Arrange
@@ -104,4 +107,15 @@ test('Can add two scaled matrix products', () => {
     expect(result[0][1]).toBe(316);
     expect(result[1][0]).toBe(68);
     expect(result[1][1]).toBe(156);
+});
+
+test('Can raise a matrix to a positive power', () => {
+    const result = calculator.do('C^2');
+    expect(result.length).toBe(2);
+    expect(result[0].length).toBe(2);
+    expect(result[1].length).toBe(2);
+    expect(result[0][0]).toBe(7);
+    expect(result[0][1]).toBe(10);
+    expect(result[1][0]).toBe(15);
+    expect(result[1][1]).toBe(22);
 });
