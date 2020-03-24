@@ -10,7 +10,9 @@ test('Can convert infix expression to postfix expression', () => {
         { infix: 'A+B*C', expectedResult: 'ABC*+' },
         { infix: 'A*(B+C)', expectedResult: 'ABC+*' },
         { infix: '2*A+C*D', expectedResult: '2A*CD*+' },
-        { infix: 'A+B*(C-D)', expectedResult: 'ABCD-*+' }
+        { infix: 'A+B*(C-D)', expectedResult: 'ABCD-*+' },
+        { infix: '(A+B)*C', expectedResult: 'AB+C*' }
+
     ];
 
     testCases.forEach((testCase) => {

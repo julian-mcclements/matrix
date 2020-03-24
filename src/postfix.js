@@ -1,7 +1,23 @@
 const EXPONENT = '^';
 const OPEN_PARENTHESIS = '(';
 const CLOSING_PARENTHESIS = ')';
-const operators = ['+','-','*','/',EXPONENT]
+const operators = ['+','-','*','/',EXPONENT];
+
+const entries = [];
+const pad = (str) => ''.padEnd(15 - str.length);
+const log = (parsed, stack, postfix) => {
+    const stackStr = stack.join('');
+    const message = `${parsed}${pad(parsed)}, ${stackStr}${pad(stackStr)}, ${postfix}${pad(postfix)}`;
+    entries.push(message);
+}
+
+const SHOULD_LOG = true;
+const showLogs = () => {
+    if(SHOULD_LOG) {
+        console.log(`Input${pad('Input')}, Stack${pad('Stack')}, Postfix${pad('Postfix')}`);
+        console.log(entries);
+    }
+}
 
 const isNumberOrLetter = (char) => char.match(/[A-Z0-9]/i);
 
@@ -24,14 +40,6 @@ const getPrecedence = (operator) => {
 
 const notParenthesis = (char) => char !== '(' && char !== ')';
 
-// const appendOperator = (expression, stack) => {
-//     const operator = stack.pop();
-//     result = notParenthesis(operator) ? 
-//         expression + operator : expression;
-//     console.log(`Postfix written so far === ${result}`);
-//     return result;
-// }
-
 const infixToPostfix = (infix) => {
     let parsed = '';
     let postfix = '';
@@ -41,43 +49,41 @@ const infixToPostfix = (infix) => {
         parsed += char;
         if(isNumberOrLetter(char)){
             postfix += char;
-            console.log(`Infix === ${parsed}, Stack === ${operatorStack.join('')}, Postfix === ${postfix}`);
+            log(parsed, operatorStack, postfix);
 		}else if(operators.includes(char)){
             while(
                 char != EXPONENT && 
                 operatorStack.length > 0 && 
                 (getPrecedence(char) <= getPrecedence(operatorStack[operatorStack.length - 1])))
             {
-                const operator = operatorStack.pop();
-                if(notParenthesis(operator)){
-                    postfix += operator;
-                }
-                console.log(`Infix === ${parsed}, Stack === ${operatorStack.join('')}, Postfix === ${postfix}`);
+                postfix += operatorStack.pop();
+                log(parsed, operatorStack, postfix);
 			}
 			operatorStack.push(char);
 		}else if(char === OPEN_PARENTHESIS) {
             operatorStack.push(char);
-            console.log(`Infix === ${parsed}, Stack === ${operatorStack.join('')}, Postfix === ${postfix}`);
+            log(parsed, operatorStack, postfix);
         }else if(char === CLOSING_PARENTHESIS) {
             while(
                 operatorStack.length > 0 && 
                 operatorStack[operatorStack.length - 1] !== OPEN_PARENTHESIS) {
                 postfix += operatorStack.pop();
-                console.log(`Infix === ${parsed}, Stack === ${operatorStack.join('')}, Postfix === ${postfix}`);
+                log(parsed, operatorStack, postfix);
             }
             if(operatorStack[operatorStack.length - 1] === OPEN_PARENTHESIS) {
                 operatorStack.pop();
-                console.log(`Infix === ${parsed}, Stack === ${operatorStack.join('')}, Postfix === ${postfix}`);
+                log(parsed, operatorStack, postfix);
             }
         }
 	}
 	while(operatorStack.length > 0){
         const operator = operatorStack.pop();
-        if(notParenthesis(operator)){
+        if(operator !== OPEN_PARENTHESIS) {
             postfix += operator;
         }
-        console.log(`Infix === ${parsed}, Stack === ${operatorStack.join('')}, Postfix === ${postfix}`);
-	}
+        log(parsed, operatorStack, postfix);
+    }
+    showLogs();
     return postfix;
 }
 
