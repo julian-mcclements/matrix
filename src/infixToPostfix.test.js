@@ -1,7 +1,6 @@
 const { infixToPostfix } = require('./postfix');
 
 test('Can convert infix expression to postfix expression', () => {
-
     const testCases = [
         { infix: '2+3*4', expectedResult: '234*+' },
         { infix: '2*3-4^2', expectedResult: '23*42^-' },
@@ -11,12 +10,12 @@ test('Can convert infix expression to postfix expression', () => {
         { infix: 'A+B*C', expectedResult: 'ABC*+' },
         { infix: 'A*(B+C)', expectedResult: 'ABC+*' },
         { infix: '2*A+C*D', expectedResult: '2A*CD*+' },
-        { infix: 'A+B*(C-D)', expectedResult: 'ABCD-*+' },
+        { infix: 'A+B*(C-D)', expectedResult: 'ABCD-*+' }
     ];
 
     testCases.forEach((testCase) => {
         const result = infixToPostfix(testCase.infix);
-        console.log(`Infix expression == ${testCase.infix}; Postfix expression == ${testCase.postfix}`);
+        console.log(`Infix expression == ${testCase.infix}; Postfix expression == ${testCase.expectedResult}`);
         expect(result).toBe(testCase.expectedResult);
     });
 });
