@@ -44,7 +44,7 @@ test('Can get a previously initialised matrix', () => {
 });
 
 test('Can multiply a matrix by a scalar', () => {
-    const result = calculator.do('2A');
+    const result = calculator.do('2*A');
     expect(result.length).toBe(2);
     expect(result[0].length).toBe(2);
     expect(result[1].length).toBe(2);
@@ -55,7 +55,7 @@ test('Can multiply a matrix by a scalar', () => {
 });
 
 test('Can multiply two matrices', () => {
-    const result = calculator.do('AB');
+    const result = calculator.do('A*B');
     expect(result.length).toBe(2);
     expect(result[0].length).toBe(2);
     expect(result[1].length).toBe(2);
@@ -66,7 +66,7 @@ test('Can multiply two matrices', () => {
 });
 
 test('Can scale a matrix and then multiply it by another matrix', () => {
-    const result = calculator.do('2AB');
+    const result = calculator.do('2*A*B');
     expect(result.length).toBe(2);
     expect(result[0].length).toBe(2);
     expect(result[1].length).toBe(2);
@@ -99,7 +99,7 @@ test('Can subtract two matrices', () => {
 });
 
 test('Can add two scaled matrix products', () => {
-    const result = calculator.do('2AB + 2AB');
+    const result = calculator.do('2 * A * B + 2 * A *B');
     expect(result.length).toBe(2);
     expect(result[0].length).toBe(2);
     expect(result[1].length).toBe(2);

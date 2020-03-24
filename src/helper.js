@@ -30,3 +30,5 @@ exports.lex = (s) => {
     });
     return matrix;
 };
+
+exports.isNumberOrLetter = (char) => char.match(/[A-Z0-9]/i);

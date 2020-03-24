@@ -1,3 +1,5 @@
+const { isNumberOrLetter } = require('./helper');
+
 const OPEN_PARENTHESIS = '(';
 const CLOSING_PARENTHESIS = ')';
 const operators = ['+','-','*','/','^'];
@@ -13,12 +15,10 @@ const log = (parsed, stack, postfix) => {
 const SHOULD_LOG = false;
 const showLogs = () => {
     if(SHOULD_LOG) {
-        console.log(`Input${pad('Input')}, Stack${pad('Stack')}, Postfix${pad('Postfix')}`);
-        console.log(entries);
+        console.log(`Input${pad('Input')}, Stack${pad('Stack')}, Postfix${pad('Postfix')}\n`, entries);
+        entries.length = 0;
     }
 }
-
-const isNumberOrLetter = (char) => char.match(/[A-Z0-9]/i);
 
 const getPrecedence = (operator) => {
     switch(operator){
@@ -40,46 +40,46 @@ const getPrecedence = (operator) => {
 const infixToPostfix = (infix) => {
     let parsed = '';
     let postfix = '';
-	const operatorStack = [];
+	const stack = [];
 	for(let i=0; i < infix.length; i++){
         const char = infix.charAt(i);
         parsed += char;
         if(isNumberOrLetter(char)){
             postfix += char;
-            log(parsed, operatorStack, postfix);
+            log(parsed, stack, postfix);
         }
         else if(char === OPEN_PARENTHESIS){
-            operatorStack.push(char);
-            log(parsed, operatorStack, postfix);
+            stack.push(char);
+            log(parsed, stack, postfix);
         }
         else if(char === CLOSING_PARENTHESIS) {
             while(
-                operatorStack.length > 0 && 
-                operatorStack[operatorStack.length - 1] !== OPEN_PARENTHESIS) {
-                postfix += operatorStack.pop();
-                log(parsed, operatorStack, postfix);
+                stack.length > 0 && 
+                stack[stack.length - 1] !== OPEN_PARENTHESIS) {
+                postfix += stack.pop();
+                log(parsed, stack, postfix);
             }
             // Pop the opening parenthesis
-            operatorStack.pop();
-            log(parsed, operatorStack, postfix);
+            stack.pop();
+            log(parsed, stack, postfix);
         }
         else if(operators.includes(char)){
             while(
-                operatorStack.length > 0 && 
-                (getPrecedence(char) <= getPrecedence(operatorStack[operatorStack.length - 1])))
+                stack.length > 0 && 
+                (getPrecedence(char) <= getPrecedence(stack[stack.length - 1])))
             {
-                postfix += operatorStack.pop();
-                log(parsed, operatorStack, postfix);
+                postfix += stack.pop();
+                log(parsed, stack, postfix);
 			}
-			operatorStack.push(char);
+			stack.push(char);
 		}
 	}
-	while(operatorStack.length > 0){
-        const operator = operatorStack.pop();
+	while(stack.length > 0){
+        const operator = stack.pop();
         if(operator !== OPEN_PARENTHESIS) {
             postfix += operator;
         }
-        log(parsed, operatorStack, postfix);
+        log(parsed, stack, postfix);
     }
     showLogs();
     return postfix;

@@ -19,7 +19,6 @@ test('Can convert infix expression to postfix expression', () => {
 
     testCases.forEach((testCase) => {
         const result = infixToPostfix(testCase.infix);
-        console.log(`Infix expression == ${testCase.infix}; Postfix expression == ${testCase.expectedResult}`);
         expect(result).toBe(testCase.expectedResult);
     });
 });
