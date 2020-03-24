@@ -11,7 +11,9 @@ test('Can convert infix expression to postfix expression', () => {
         { infix: 'A*(B+C)', expectedResult: 'ABC+*' },
         { infix: '2*A+C*D', expectedResult: '2A*CD*+' },
         { infix: 'A+B*(C-D)', expectedResult: 'ABCD-*+' },
-        { infix: '(A+B)*C', expectedResult: 'AB+C*' }
+        { infix: '(A+B)*C', expectedResult: 'AB+C*' },
+        { infix: 'A^2*(C+D)', expectedResult: 'A2^CD+*' },
+        { infix: 'A*(B+C)-D/(E+F)', expectedResult: 'ABC+*DEF+/-'}
 
     ];
 

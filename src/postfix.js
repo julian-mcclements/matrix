@@ -1,7 +1,6 @@
-const EXPONENT = '^';
 const OPEN_PARENTHESIS = '(';
 const CLOSING_PARENTHESIS = ')';
-const operators = ['+','-','*','/',EXPONENT];
+const operators = ['+','-','*','/','^'];
 
 const entries = [];
 const pad = (str) => ''.padEnd(15 - str.length);
@@ -11,7 +10,7 @@ const log = (parsed, stack, postfix) => {
     entries.push(message);
 }
 
-const SHOULD_LOG = true;
+const SHOULD_LOG = false;
 const showLogs = () => {
     if(SHOULD_LOG) {
         console.log(`Input${pad('Input')}, Stack${pad('Stack')}, Postfix${pad('Postfix')}`);
@@ -38,8 +37,6 @@ const getPrecedence = (operator) => {
     }
 }
 
-const notParenthesis = (char) => char !== '(' && char !== ')';
-
 const infixToPostfix = (infix) => {
     let parsed = '';
     let postfix = '';
@@ -50,9 +47,24 @@ const infixToPostfix = (infix) => {
         if(isNumberOrLetter(char)){
             postfix += char;
             log(parsed, operatorStack, postfix);
-		}else if(operators.includes(char)){
+        }
+        else if(char === OPEN_PARENTHESIS){
+            operatorStack.push(char);
+            log(parsed, operatorStack, postfix);
+        }
+        else if(char === CLOSING_PARENTHESIS) {
             while(
-                char != EXPONENT && 
+                operatorStack.length > 0 && 
+                operatorStack[operatorStack.length - 1] !== OPEN_PARENTHESIS) {
+                postfix += operatorStack.pop();
+                log(parsed, operatorStack, postfix);
+            }
+            // Pop the opening parenthesis
+            operatorStack.pop();
+            log(parsed, operatorStack, postfix);
+        }
+        else if(operators.includes(char)){
+            while(
                 operatorStack.length > 0 && 
                 (getPrecedence(char) <= getPrecedence(operatorStack[operatorStack.length - 1])))
             {
@@ -60,21 +72,7 @@ const infixToPostfix = (infix) => {
                 log(parsed, operatorStack, postfix);
 			}
 			operatorStack.push(char);
-		}else if(char === OPEN_PARENTHESIS) {
-            operatorStack.push(char);
-            log(parsed, operatorStack, postfix);
-        }else if(char === CLOSING_PARENTHESIS) {
-            while(
-                operatorStack.length > 0 && 
-                operatorStack[operatorStack.length - 1] !== OPEN_PARENTHESIS) {
-                postfix += operatorStack.pop();
-                log(parsed, operatorStack, postfix);
-            }
-            if(operatorStack[operatorStack.length - 1] === OPEN_PARENTHESIS) {
-                operatorStack.pop();
-                log(parsed, operatorStack, postfix);
-            }
-        }
+		}
 	}
 	while(operatorStack.length > 0){
         const operator = operatorStack.pop();
