@@ -33,6 +33,25 @@ test('Can register and initialise a new matrix', () => {
     expect(result[1][1]).toBe(61);
 });
 
+test('Can set all elements in a matrix to be multipled by -1', () => {
+    // Arrange
+    const Y = `
+    47  38
+    79  61`;
+   
+    // Act
+    const result = calculator.initAsNegative('Y', Y);
+
+    // Assert
+    expect(result.length).toBe(2);
+    expect(result[0].length).toBe(2);
+    expect(result[1].length).toBe(2);
+    expect(result[0][0]).toBe(-47);
+    expect(result[0][1]).toBe(-38);
+    expect(result[1][0]).toBe(-79);
+    expect(result[1][1]).toBe(-61);
+});
+
 test('Can get a previously initialised matrix', () => {
     // Act
     const result = calculator.get('A');

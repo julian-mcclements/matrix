@@ -16,6 +16,21 @@ exports.init = (key, s) => {
     return copy(registry[key]);
 }
 
+exports.initAsNegative = (key, s) => {
+    const src = helper.lex(s);
+    const destination = [];
+    for(let i = 0; i < src.length; i++){
+        const srcRow = src[i];
+        const destRow = [];
+        for(let j = 0; j < srcRow.length; j++) {
+            destRow[j] = srcRow[j] * -1;    
+        }
+        destination.push(destRow);
+    }
+    registry[key] = destination;
+    return copy(registry[key]);
+}
+
 const get = (key) => copy(registry[key]);
 exports.get = get;
 
