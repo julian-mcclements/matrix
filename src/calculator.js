@@ -90,3 +90,8 @@ exports.do = (infix, showlog) => {
     }
     return finalResult;
 };
+
+exports.transpose = (src, key) => {
+    registry[key] = matrix.transpose(copy(registry[src]));
+    return copy(registry[key]);
+};

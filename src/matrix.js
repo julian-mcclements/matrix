@@ -64,3 +64,13 @@ exports.product = (matrix1, matrix2) => {
     });
     return product;
 }
+
+exports.transpose = (matrix) => {
+    const result = [];
+    const cols = matrix[0].length;
+    for(let i = 0; i < cols; i++){
+        const col = getColumn(matrix, i);
+        result.push(col);
+    }
+    return result;
+}

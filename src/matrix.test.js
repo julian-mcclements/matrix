@@ -140,5 +140,44 @@ test('Raise error when trying multiply matrices of different sizes', ()=> {
         -1
         1`);
     expect(() => matrix.product(A, C)).toThrow('Cannot multiply matrices. Number of columns of left hand matrix does not equal number of rows of right hand matrix.');
+});
 
+test('Create transpose of a matrix', () => {
+    // Arrange
+    const A = helper.lex(`
+    1   2
+    3   4
+    5   6`);
+
+    // Act
+    const result = matrix.transpose(A);
+
+    // Assert
+    expect(result.length).toBe(2);
+    expect(result[0].length).toBe(3);
+    expect(result[1].length).toBe(3);
+    expect(result[0][0]).toBe(1);
+    expect(result[0][1]).toBe(3);
+    expect(result[0][2]).toBe(5);
+    expect(result[1][0]).toBe(2);
+    expect(result[1][1]).toBe(4);
+    expect(result[1][2]).toBe(6);
+});
+
+test('Create transpose of a vector', () => {
+    // Arrange
+    const A = helper.lex(`
+    1   2   3`);
+
+    // Act
+    const result = matrix.transpose(A);
+
+    // Assert
+    expect(result.length).toBe(3);
+    expect(result[0].length).toBe(1);
+    expect(result[1].length).toBe(1);
+    expect(result[2].length).toBe(1);
+    expect(result[0][0]).toBe(1);
+    expect(result[1][0]).toBe(2);
+    expect(result[2][0]).toBe(3);
 });

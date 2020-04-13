@@ -9,6 +9,10 @@ calculator.init('B',`
 calculator.init('C',`
     1   2
     3   4`);    
+calculator.init('D',`
+    1   2
+    3   4
+    5   6`);        
 
 test('Can register and initialise a new matrix', () => {
     // Arrange
@@ -118,4 +122,17 @@ test('Can raise a matrix to a positive power', () => {
     expect(result[0][1]).toBe(10);
     expect(result[1][0]).toBe(15);
     expect(result[1][1]).toBe(22);
+});
+
+test('Can create the transpose of a matrix', () => {
+    const result = calculator.transpose('D', 'E');
+    expect(result.length).toBe(2);
+    expect(result[0].length).toBe(3);
+    expect(result[1].length).toBe(3);
+    expect(result[0][0]).toBe(1);
+    expect(result[0][1]).toBe(3);
+    expect(result[0][2]).toBe(5);
+    expect(result[1][0]).toBe(2);
+    expect(result[1][1]).toBe(4);
+    expect(result[1][2]).toBe(6);
 });
