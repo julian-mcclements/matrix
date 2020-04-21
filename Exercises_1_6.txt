@@ -89,6 +89,8 @@
 4.
       Prove transpose of I = I where I is the identity matrix. 
 
+      I is a square matrix n x n The transpose will also be a square matrix n x n.
+
       Let I = (i[jk]) = 1 if j = k, 0 if j <> k
 
       Let transpose of I be I'
