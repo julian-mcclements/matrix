@@ -1,0 +1,125 @@
+1.
+  (a)
+        1       3
+        2       4
+  (b)
+        1       -1
+        2       -2
+        3       -3
+  (c)
+        -1
+        5
+        9
+        100
+  (d)
+        a       c
+        b       d
+  (e)
+        0       0       0
+        0       0       0
+  (f)
+        0       0       0       0
+        1       0       0       0
+        0       1       0       0
+        0       0       1       0
+
+
+2.
+  (a)
+        35      -35
+        16      -66
+  (b)
+        28      -36     16
+        45      -30     35
+  (c)
+        0       -5
+        5       0
+  (d)
+        0       -5      -5
+        5       0       -1
+        5       1       0
+  (e)
+        -6      3       1
+        8       9       -2
+        6       -1      5
+  (f)
+        -8      12
+        2       10
+  (g)
+        4       -1
+        4       -5
+        13      8
+  (h)
+        4       4       13
+        -1      -5      8
+  (i)
+        4       4       13
+        -1      -5      8
+  (j)
+        -27     8       -9
+        -58     32      -26
+  (k)
+        6       -8      -6
+        -3      -9      1
+        -1      2       -5
+  (l)
+        6       -8      -6
+        -3      -9      1
+        -1      2       -5
+  (m)
+        22      6
+        1       31
+  (n)
+        22      6
+        1       31
+
+3.
+  (a) Transpose of u is       1     2     3
+
+      Product = 1 * 4 + 2 * 5 + 3 * 6     =     32
+
+  (b) Transpose of v is       4     5     6
+
+      Product = 4 * 1 + 5 * 2 + 6 * 3     =     32
+
+  (c) Dot Product of u and v is
+
+      1 * 4 + 2 * 5 + 3 * 6   =     32
+
+4.
+      Prove transpose of I = I where I is the identity matrix. 
+
+      Let I = (i[jk]) = 1 if j = k, 0 if j <> k
+
+      Let transpose of I be I'
+      
+      I' = (i[jk])' = (i[kj])
+
+      If j = k then     (i[jk])' = (i[kj]) = 1
+
+      if j <> k then    (i[jk])' = (i[kj]) = 0
+
+      Therefore I' = I
+
+      Or
+                   --                         --
+      I     =     |  i11      i12   ...   i1k   |
+                  |  i21      i22   ...   i2k   |
+                  |   .        .     .     .    |
+                  |   .        .     .     .    |
+                  |   .        .     .     .    |
+                  |  ij1      ij2    .    ijk   |
+                   --                         --
+
+                   --                         --
+      I'     =    |  i11      i21   ...   ij1   |
+                  |  i12      i22   ...   ij2   |
+                  |   .        .     .     .    |
+                  |   .        .     .     .    |
+                  |   .        .     .     .    |
+                  |  ik1      ik2    .    ikj   |
+                   --                         --
+
+      If j = k then     (i[jk])' = (i[kj]) = 1 (they have the same position in both I and I')
+
+      If j <> k then    (i[jk])' = (i[kj]) = 0 (the same value, zero, occupies the position in both I and I')

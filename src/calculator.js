@@ -11,13 +11,25 @@ const copy = (source) => {
     }
     return destination;
 }
+
 exports.init = (key, s) => {
-    registry[key] = helper.lex(s);
+    if(Array.isArray(s)) {
+        registry[key] = s;
+    }
+    else {
+        registry[key] = helper.lex(s);
+    }
     return copy(registry[key]);
 }
 
 exports.initAsNegative = (key, s) => {
-    const src = helper.lex(s);
+    let src;
+    if(Array.isArray(s)) {
+        src = s;
+    }
+    else {
+        src = helper.lex(s);
+    }
     const destination = [];
     for(let i = 0; i < src.length; i++){
         const srcRow = src[i];
